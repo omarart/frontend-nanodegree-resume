@@ -134,10 +134,10 @@ var projects = {
             $('.project-entry:last').append(formattedDescription);
     
             if (project.images.length > 0 ) {
-                for ( var image in project.images) {
-                    var formattedImage = HTMLprojectImage.replace('%data%', project.images[image]);
+                project.images.forEach(function(image){
+                    var formattedImage = HTMLprojectImage.replace('%data%', image);
                     $('.project-entry:last').append(formattedImage);
-                }
+                });
             }
         });
     }
