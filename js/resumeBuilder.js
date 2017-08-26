@@ -85,28 +85,26 @@ var work = {
             title: 'Weesaam.com',
             dates: 'Jun 2015 - Present',
             description:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s' ,
-            location: 'Riyadh - Website'
+            location: 'Riyadh'
         } 
     ] ,
     displayWork:function(){
-        for( var job in work.jobs) {
+        work.jobs.forEach(function(job) {
             $('#workExperience').append(HTMLworkStart);
-    
-            var formattedEmployer = HTMLworkEmployer.replace('%data%' , work.jobs[job].employer);
-            var formattedTitle = HTMLworkTitle.replace('%data%' , work.jobs[job].title);
+            var formattedEmployer = HTMLworkEmployer.replace('%data%' , job.employer);
+            var formattedTitle = HTMLworkTitle.replace('%data%' , job.title);
             var formattedEmployerTitle = formattedEmployer + formattedTitle;
             $('.work-entry:last').append(formattedEmployerTitle);
     
-            var formattedWorkLocation = HTMLworkLocation.replace('%data%' , work.jobs[job].location);
+            var formattedWorkLocation = HTMLworkLocation.replace('%data%' , job.location);
             $('.work-entry:last').append(formattedWorkLocation);
     
-            var formattedDates = HTMLworkDates.replace('%data%' , work.jobs[job].dates);
+            var formattedDates = HTMLworkDates.replace('%data%' , job.dates);
             $('.work-entry:last').append(formattedDates);
     
-    
-            var formattedDescription = HTMLworkDescription.replace('%data%' , work.jobs[job].description);
+            var formattedDescription = HTMLworkDescription.replace('%data%' , job.description);
             $('.work-entry:last').append(formattedDescription);
-        }
+        });
     }
 } ;
 work.displayWork();
@@ -123,25 +121,25 @@ var projects = {
         }
     ] ,
     displayProject:function() {
-        for( var project in projects.projects) {
+        projects.projects.forEach(function(project){
             $('#projects').append(HTMLprojectStart);
-    
-            var formattedTitle = HTMLprojectTitle.replace('%data%',projects.projects[project].title);
+            
+            var formattedTitle = HTMLprojectTitle.replace('%data%',project.title);
             $('.project-entry:last').append(formattedTitle);
     
-            var formattedDates = HTMLprojectDates.replace('%data%',projects.projects[project].dates);
+            var formattedDates = HTMLprojectDates.replace('%data%',project.dates);
             $('.project-entry:last').append(formattedDates);
     
-            var formattedDescription = HTMLprojectDescription.replace('%data%',projects.projects[project].description);
+            var formattedDescription = HTMLprojectDescription.replace('%data%',project.description);
             $('.project-entry:last').append(formattedDescription);
     
-            if (projects.projects[project].images.length > 0 ) {
-                for ( var image in projects.projects[project].images) {
-                    var formattedImage = HTMLprojectImage.replace('%data%', projects.projects[project].images[image]);
+            if (project.images.length > 0 ) {
+                for ( var image in project.images) {
+                    var formattedImage = HTMLprojectImage.replace('%data%', project.images[image]);
                     $('.project-entry:last').append(formattedImage);
                 }
             }
-        }
+        });
     }
 };
 projects.displayProject();
@@ -150,7 +148,7 @@ var education = {
     schools: [
         {
             name: 'Al-Imam Universit' ,
-            city: 'Riyadh' ,
+            location: 'Riyadh' ,
             degree: 'Bacalors' ,
             majors: ['Computer Science'] ,
             dates : '2018' ,
@@ -158,7 +156,7 @@ var education = {
         },
         {
             name: 'Al Shifa High School' ,
-            city: 'Riyadh' ,
+            location: 'Riyadh' ,
             degree: 'High school' ,
             majors: ['General'] ,
             dates : '2012' ,
@@ -187,41 +185,39 @@ var education = {
 
     ] ,
     displayEducation:function(){
-        for( var school in education.schools) {
+        education.schools.forEach(function(school){
             $('#education').append(HTMLschoolStart);
-    
-            var formattedSchoolName = HTMLschoolName.replace('%data%' , education.schools[school].name) ;
-            var formattedSchoolDegree = HTMLschoolDegree.replace('%data%' , education.schools[school].degree) ;        
+            
+            var formattedSchoolName = HTMLschoolName.replace('%data%' , school.name) ;
+            var formattedSchoolDegree = HTMLschoolDegree.replace('%data%' , school.degree) ;        
             var formattedNameDeqreeSchool = formattedSchoolName + formattedSchoolDegree;
-            var formattedSchoolDates = HTMLschoolDates.replace('%data%' , education.schools[school].dates) ;
-            var formattedSchoolMajors = HTMLschoolMajor.replace('%data%' , education.schools[school].majors) ;
-            var formattedSchoolLocation = HTMLschoolLocation.replace('%data%' , education.schools[school].city) ;
+            var formattedSchoolDates = HTMLschoolDates.replace('%data%' , school.dates) ;
+            var formattedSchoolMajors = HTMLschoolMajor.replace('%data%' , school.majors) ;
+            var formattedSchoolLocation = HTMLschoolLocation.replace('%data%' , school.location) ;
         
             $('.education-entry:last').append(formattedNameDeqreeSchool);
             $('.education-entry:last').append(formattedSchoolDates);
             $('.education-entry:last').append(formattedSchoolMajors);
-            $('.education-entry:last').append(formattedSchoolLocation);    
-        }
+            $('.education-entry:last').append(formattedSchoolLocation);   
+        });
+
     
         $('.education-entry:last').append(HTMLonlineClasses);
         
-        for( var online in education.onlineCourses) {
-    
-            var formattedOnlineTitle = HTMLonlineTitle.replace('%data%' , education.onlineCourses[online].title) ;
-            var formattedOnlineSchool = HTMLonlineSchool.replace('%data%' , education.onlineCourses[online].school) ;
+        education.onlineCourses.forEach(function(online){
+            var formattedOnlineTitle = HTMLonlineTitle.replace('%data%' , online.title) ;
+            var formattedOnlineSchool = HTMLonlineSchool.replace('%data%' , online.school) ;
             var formattedTitleSchoolOnline = formattedOnlineTitle + formattedOnlineSchool;
-            var formattedOnlineDates = HTMLonlineDates.replace('%data%' , education.onlineCourses[online].dates) ;
-            var formattedOnlineUrl = HTMLonlineURL.replace('%data%' , education.onlineCourses[online].url) ;
+            var formattedOnlineDates = HTMLonlineDates.replace('%data%' , online.dates) ;
+            var formattedOnlineUrl = HTMLonlineURL.replace('%data%' , online.url) ;
         
             $('.education-entry:last').append(formattedTitleSchoolOnline);
             $('.education-entry:last').append(formattedOnlineDates);
             $('.education-entry:last').append(formattedOnlineUrl);    
-        }
+        });
     }
 };
 education.displayEducation();
-
-$('#mapDiv').append(googleMap);
 
 function displayFooter(){
     var formattedMobile = HTMLmobile.replace('%data%',bio.contacts.mobile);
@@ -242,40 +238,6 @@ function displayFooter(){
 displayFooter();
 
 
-
-
-$(document).click(function(loc) {
-    var x = loc.pageX;
-    var y = loc.pageY;
-  
-    logClicks(x,y);
-  });
-  
-// function inName(name) {
-//       name = name.trim().split(" ");
-//       console.log(name);
-//       name[1] = name[1].toUpperCase();
-//       name[0] = name[0].slice(0,1).toUpperCase() + 
-//       name[0].slice(1).toLowerCase();
-  
-//       return name[0] + ' ' + name[1];
-// }
-  
-// $('#main').append(internationalizeButton);
-  
-
-
-
-// ************************************ Test 
-// work.position = 'Course Developer';
-// work.employer = 'Udacity';
-// work.years = 0.3 ;
-
-// education['name'] = 'univercity';
-// education['years']='2012 - 2016' ;
-// education['city']= 'Riyadh' ;
- 
-//  $('#main').prepend(education.name);
-//  $('#main').prepend(work['position']);
+$('#mapDiv').append(googleMap);
 
  
